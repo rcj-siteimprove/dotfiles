@@ -1,0 +1,6 @@
+alias ..="cd .."
+alias ....="cd ../.."
+alias ......="cd ../../.."
+alias ........="cd ../../../.."
+alias ..........="cd ../../../../.."
+alias gitroot="cd $(git rev-parse --show-toplevel)"
