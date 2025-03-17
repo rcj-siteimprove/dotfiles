@@ -1,9 +1,16 @@
 [user]
   name = Rolf Christian Jørgensen
-  email = 27211248+rcjorgensen@users.noreply.github.com
+  email = 114920418+rcj-siteimprove@users.noreply.github.com
+
+[core]
+  editor = nvim
+  pager = less -FRX
+
+[pull]
+  rebase = true
 
 [init]
   defaultBranch = main
 
-[core]
-  editor = nvim
+[push]
+  autoSetupRemote = true
