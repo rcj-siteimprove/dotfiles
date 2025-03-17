@@ -6,7 +6,7 @@
 
 Generate a new key and upload it to GitHub.
 ```sh
-EMAIL="27211248+rcjorgensen@users.noreply.github.com"
+EMAIL="114920418+rcj-siteimprove@users.noreply.github.com"
 KEY_FILE="$HOME/.ssh/id_ed25519"
 if [ ! -f "$KEY_FILE" ]; then
   ssh-keygen -t ed25519 -C "$EMAIL" -f "$HOME/.ssh/id_ed25519" -N ""
