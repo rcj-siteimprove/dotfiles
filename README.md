@@ -23,7 +23,7 @@ sudo apt install git -y
 ### Clone this repo
 
 ```
-git clone git@github.com:rcjorgensen/dotfiles.git ~/dotfiles
+git clone git@github.com:rcj-siteimprove/dotfiles.git ~/dotfiles
 ```
 
 ### Run install script
