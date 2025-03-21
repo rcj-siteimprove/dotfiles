@@ -7,6 +7,13 @@ vim.keymap.set('v', '<space>x', ':lua<CR>')
 vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>')
 vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>')
 
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
@@ -23,6 +30,12 @@ vim.api.nvim_create_autocmd('TermOpen', {
   end,
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'typescript,typescriptreact',
+  group = vim.api.nvim_create_augroup('typescript-make', { clear = true }),
+  command = 'compiler tsc | setlocal makeprg=yarn\\ tsc\\ --build'
+})
+
 vim.keymap.set("n", "<space>st", function()
   vim.cmd.vnew()
   vim.cmd.term()
@@ -30,7 +43,7 @@ vim.keymap.set("n", "<space>st", function()
   vim.api.nvim_win_set_height(0, 5)
 end)
 
-vim.opt.relativenumber = true
+vim.opt.number = true
 vim.opt.mouse = 'a'
 vim.opt.breakindent = true
 vim.opt.undofile = true
@@ -43,9 +56,6 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 vim.opt.hlsearch = true
 vim.opt.signcolumn = 'yes'
-
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
 vim.opt.clipboard = 'unnamedplus'
 
 vim.keymap.set('n', 'grn', vim.lsp.buf.rename)
@@ -54,3 +64,6 @@ vim.keymap.set('n', 'grr', vim.lsp.buf.references)
 vim.keymap.set('n', 'gri', vim.lsp.buf.implementation)
 vim.keymap.set('n', 'gO', vim.lsp.buf.document_symbol)
 vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help)
+
+-- The line beneath this is called `modeline`. See `:help modeline`
+-- vim: ts=2 sts=2 sw=2 et
