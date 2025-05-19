@@ -19,13 +19,13 @@ return {
 
     require("telescope").load_extension("fzf")
 
-    vim.keymap.set("n", "<space>fh", require("telescope.builtin").help_tags)
-    vim.keymap.set("n", "<space>fd", require("telescope.builtin").find_files)
+    vim.keymap.set("n", "<space>fh", require("telescope.builtin").help_tags, { desc = "[F]ind [H]elp" })
+    vim.keymap.set("n", "<space>fd", require("telescope.builtin").find_files, { desc = "[F]ind Files" })
     vim.keymap.set("n", "<space>en", function()
       require("telescope.builtin").find_files {
         cwd = vim.fn.stdpath("config")
       }
-    end)
+    end, { desc = "[E]dit [N]eovim" })
     vim.keymap.set("n", "<space>ep", function()
       require("telescope.builtin").find_files {
         cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
