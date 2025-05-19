@@ -37,7 +37,7 @@ local live_multigrep = function(opts)
     cwd = opts.cwd
   }
 
-  pickers.new(opts, {
+  pickers.new(require("telescope.themes").get_ivy(opts), {
     debounce = 100,
     prompt_title = "Multi Grep",
     finder = finder,

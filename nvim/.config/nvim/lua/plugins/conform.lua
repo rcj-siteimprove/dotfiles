@@ -6,26 +6,20 @@ return {
     require("conform").setup {
       formatters_by_ft = {
         lua = { 'stylua' },
-        javascript = { 'prettier' },
-        typescript = { 'prettier' },
-        javascriptreact = { 'prettier' },
-        typescriptreact = { 'prettier' },
-        json = { 'prettier' },
-        jsonc = { 'prettier' },
-        html = { 'prettier' },
-        css = { 'prettier' },
-        markdown = { 'prettier' },
+        javascript = { 'prettierd', 'prettier' },
+        typescript = { 'prettierd', 'prettier' },
+        javascriptreact = { 'prettierd', 'prettier' },
+        typescriptreact = { 'prettierd', 'prettier' },
+        json = { 'prettierd', 'prettier' },
+        jsonc = { 'prettierd', 'prettier' },
+        html = { 'prettierd', 'prettier' },
+        css = { 'prettierd', 'prettier' },
+        markdown = { 'prettierd', 'prettier' },
       },
-      default_format_opts = {
+      format_on_save = {
+        timeout_ms = 500,
         lsp_format = "fallback"
       },
-      format_on_save = function(bufnr)
-        local typescript_like_filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }
-        if vim.tbl_contains(typescript_like_filetypes, vim.bo[bufnr].filetype) then
-          require("typescript-tools.api").organize_imports(true)
-        end
-        return { timeout_ms = 500, lsp_format = "fallback" }
-      end,
       notify_on_error = true
     }
   end

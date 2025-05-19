@@ -10,6 +10,10 @@ return {
         },
       },
     },
+    {
+      "Hoffs/omnisharp-extended-lsp.nvim",
+      lazy = true,
+    }
   },
   config = function()
     local capabilities = require('blink.cmp').get_lsp_capabilities()
@@ -17,20 +21,16 @@ return {
     require 'lspconfig'.lua_ls.setup { capabilities = capabilities }
     require 'lspconfig'.racket_langserver.setup {}
 
-    vim.api.nvim_create_autocmd('LspAttach', {
-      callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if not client then return end
+    local omnisharp_extended = require("omnisharp_extended")
 
-        if client.supports_method('textDocument/formatting') then
-          vim.api.nvim_create_autocmd('BufWritePre', {
-            buffer = args.buf,
-            callback = function()
-              vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
-            end,
-          })
-        end
-      end,
+    require("lspconfig").omnisharp.setup({
+      cmd = { "OmniSharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+      handlers = {
+        ["textDocument/definition"] = omnisharp_extended.handler,
+      },
+      enable_import_completion = true,
+      organize_imports_on_format = true,
+      capabilities = capabilities,
     })
   end,
 }
